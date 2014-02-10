@@ -133,6 +133,8 @@ class Array
     }.uniq - [ nil ]
     return_value.each{|e| self.delete(e) }
 
+    return_value ||= Array.new
+
     return return_value
 
   end
