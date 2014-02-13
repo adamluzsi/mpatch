@@ -122,12 +122,12 @@ class Array
   # return_array
   def extract_class! class_name
 
-    if class_name.class != Class
+    unless class_name.class <= Class
       raise ArgumentError, "parameter must be a class name"
     end
 
     return_value= self.map { |element|
-      if element.class == class_name
+      if element.class <= class_name
         element
       end
     }.uniq - [ nil ]
