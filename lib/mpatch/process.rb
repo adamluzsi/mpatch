@@ -4,7 +4,7 @@ module Process
   def self.memory_usage
 
     begin
-      return `pmap #{Process.pid}`.lines.to_a(
+      return `pmap #{self.pid}`.lines.to_a(
       ).last.chomp.scan(/ *\w* *(\w+)/)[0][0]
     rescue NoMethodError
       return nil
