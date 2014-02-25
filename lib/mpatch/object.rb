@@ -18,13 +18,6 @@ class Object
     return self
   end unless method_defined? :must_be
 
-  # return the object Binding
-  def binding?
-    return binding
-  end
-
-  alias :get_binding :binding?
-
   # The hidden singleton lurks behind everyone
   def metaclass; class << self; self; end; end
 
