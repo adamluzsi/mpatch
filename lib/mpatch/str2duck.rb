@@ -1,0 +1,1 @@
+require 'str2duck'
