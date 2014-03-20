@@ -9,7 +9,6 @@ module MPatch
       MPatch::Proc,
       MPatch::YAML,
       MPatch::Object,
-      MPatch::File,
       MPatch::Array,
       MPatch::Integer,
       MPatch::Hash
