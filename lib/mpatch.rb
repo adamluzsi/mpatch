@@ -23,9 +23,7 @@ module MPatch
 
   end
 
-  [
-      MPatch::Random
-  ].each do |module_name|
+  [ MPatch::Random ].each do |module_name|
 
     constant= ::Object
     name=     module_name.to_s.split('::').last

@@ -8,7 +8,7 @@ module MPatch
     end
 
     def self.load_file(file_path)
-      YAML.load(File.open(file_path))
+      ::YAML.load(File.open(file_path))
     end
   end
 
