@@ -6,7 +6,6 @@ module MPatch
   [
       MPatch::String,
       MPatch::Proc,
-      MPatch::YAML,
       MPatch::Object,
       MPatch::Array,
       MPatch::Integer,
@@ -21,7 +20,7 @@ module MPatch
 
   end
 
-  [ MPatch::Process, MPatch::Random ].each do |module_name|
+  [ MPatch::Process, MPatch::Random, MPatch::YAML ].each do |module_name|
 
     constant= ::Object
     name=     module_name.to_s.split('::').last
