@@ -4,7 +4,6 @@ module MPatch
   Dir.glob(File.join(File.absolute_path(File.dirname(__FILE__)),"mpatch","**","*.{rb,ru}")).each{|e|require e}
 
   [
-      MPatch::Process,
       MPatch::String,
       MPatch::Proc,
       MPatch::YAML,
@@ -22,7 +21,7 @@ module MPatch
 
   end
 
-  [ MPatch::Random ].each do |module_name|
+  [ MPatch::Process, MPatch::Random ].each do |module_name|
 
     constant= ::Object
     name=     module_name.to_s.split('::').last
