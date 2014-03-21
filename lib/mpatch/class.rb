@@ -1,5 +1,5 @@
 module MPatch
-  class Class
+  module Class
 
     # get singleton methods to target class without super class methods
     def class_methods

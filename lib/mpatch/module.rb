@@ -1,5 +1,5 @@
 module MPatch
-  class Module
+  module Module
 
     # return the module objects direct sub modules
     def modules
