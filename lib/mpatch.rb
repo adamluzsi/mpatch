@@ -3,6 +3,10 @@ module MPatch
 
   Dir.glob(File.join(File.absolute_path(File.dirname(__FILE__)),"mpatch","**","*.{rb,ru}")).each{|e|require e}
 
+  [ MPatch::Module, MPatch::Class ].each do |module_name|
+    module_name.__send__ :include, MPatch::ClassAndModule
+  end
+
   [
       MPatch::Module,
       MPatch::Class,
