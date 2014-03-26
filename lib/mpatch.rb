@@ -1,38 +1,38 @@
 #encoding: UTF-8
 module MPatch
 
+  module Include;end
+  module Extend;end
+
   Dir.glob(File.join(File.absolute_path(File.dirname(__FILE__)),"mpatch","**","*.{rb,ru}")).each{|e|require e}
+  extend MPatch::Include::Module
 
-  [ MPatch::Module, MPatch::Class ].each do |module_name|
-    module_name.__send__ :include, MPatch::ClassAndModule
-  end
+  self.submodules.each do |module_name|
 
-  [
-      MPatch::Module,
-      MPatch::Class,
-      MPatch::String,
-      MPatch::Proc,
-      MPatch::Object,
-      MPatch::Array,
-      MPatch::Integer,
-      MPatch::Hash
-  ].each do |module_name|
+    method_name= module_name.to_s.split('::').last.downcase
+    module_name.__send__ :extend, MPatch::Include::Module
 
-    constant= ::Object
-    name=     module_name.to_s.split('::').last
-    constant = constant.const_defined?(name, false) ? constant.const_get(name) : constant.const_missing(name)
+    module_name.submodules.each do |sub_module_name|
 
-    constant.__send__ :include, module_name
+      constant= ::Object
+      constant_name= sub_module_name.to_s.split('::').last
+      array_of_target_constant= []
 
-  end
+      unless sub_module_name.to_s.include?('And')
+        array_of_target_constant.push constant_name
+      else
+        sub_module_name.to_s.split('::').last.split('And').each do |tag_module|
+          array_of_target_constant.push tag_module
+          #puts tag_module
+        end
+      end
 
-  [ MPatch::Process, MPatch::Random, MPatch::YAML ].each do |module_name|
+      array_of_target_constant.each do |name|
+        target_constant = constant.const_defined?(name, false) ? constant.const_get(name) : constant.const_missing(name)
+        target_constant.__send__ method_name, sub_module_name
+      end
 
-    constant= ::Object
-    name=     module_name.to_s.split('::').last
-    constant = constant.const_defined?(name, false) ? constant.const_get(name) : constant.const_missing(name)
-
-    constant.__send__ :extend, module_name
+    end
 
   end
 

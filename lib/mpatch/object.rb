@@ -1,4 +1,4 @@
-module MPatch
+module MPatch::Include
   module Object
 
     def boolean?

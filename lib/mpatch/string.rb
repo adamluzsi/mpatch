@@ -1,4 +1,4 @@
-module MPatch
+module MPatch::Include
   module String
 
     # Find string in othere string

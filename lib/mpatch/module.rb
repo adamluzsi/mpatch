@@ -1,18 +1,18 @@
-module MPatch
+module MPatch::Include
   module Module
 
     # return the module objects direct sub modules
-    def modules
+    def submodules
       constants.collect {|const_name| const_get(const_name)}.select {|const| const.class == ::Module}
     end
 
     # return the module objects direct sub modules
-    def classes
+    def subclasses
       constants.collect {|const_name| const_get(const_name)}.select {|const| const.class == ::Class}
     end
 
-    alias :submodules :modules
-    alias :subclasses :classes
+    alias :modules :submodules
+    alias :classes :subclasses
 
   end
 end

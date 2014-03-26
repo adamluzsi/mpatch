@@ -1,4 +1,4 @@
-module MPatch
+module MPatch::Include
   module Class
 
     # get singleton methods to target class without super class methods

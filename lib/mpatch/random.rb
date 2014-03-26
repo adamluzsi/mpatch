@@ -1,4 +1,4 @@
-module MPatch
+module MPatch::Extend
   module Random
 
     def string(length= 7,amount=1,hyphen= " ")

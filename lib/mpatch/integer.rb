@@ -1,5 +1,5 @@
 
-module MPatch
+module MPatch::Include
   module Integer
 
     # because for i in integer/fixnum not working,

@@ -1,6 +1,6 @@
 require 'yaml'
 
-module MPatch
+module MPatch::Extend
 
   module YAML
     def save_file(file_path,config_hash)

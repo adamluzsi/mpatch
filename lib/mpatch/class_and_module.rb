@@ -1,4 +1,4 @@
-module MPatch
+module MPatch::Include
   module ClassAndModule
     def mixin_ancestors(include_ancestors=true)
       ancestors.take_while {|a| include_ancestors || a != superclass }.

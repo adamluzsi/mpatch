@@ -1,4 +1,4 @@
-module MPatch
+module MPatch::Extend
   module Process
 
     # return a string obj that include the memory usage info

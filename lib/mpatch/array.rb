@@ -1,4 +1,5 @@
-module MPatch
+module MPatch::Include
+
   module Array
 
     # remove arguments or array of

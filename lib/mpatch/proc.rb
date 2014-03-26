@@ -1,4 +1,4 @@
-module MPatch
+module MPatch::Include
   module Proc
 
     # sugar syntax for proc * operator

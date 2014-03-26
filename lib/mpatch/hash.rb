@@ -1,4 +1,4 @@
-module MPatch
+module MPatch::Include
   module Hash
 
     # remove elements by keys,
