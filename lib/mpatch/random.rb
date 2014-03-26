@@ -12,23 +12,23 @@ module MPatch
     end
 
     def integer(length= 3)
-      self.class.rand(length)
+      self.rand(length)
     end
 
     def boolean
-      self.class.rand(2) == 1
+      self.rand(2) == 1
     end
 
     def time from = Time.at(1114924812), to = Time.now
-      self.class.rand(from..to)
+      self.rand(from..to)
     end
 
     def date from = Time.at(1114924812), to = Time.now
-      self.class.rand(from..to).to_date
+      self.rand(from..to).to_date
     end
 
     def datetime from = Time.at(1114924812), to = Time.now
-      self.class.rand(from..to).to_datetime
+      self.rand(from..to).to_datetime
     end
 
   end
