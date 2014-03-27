@@ -10,31 +10,36 @@ module MPatch
   self.submodules.each do |module_name|
 
     method_name= module_name.to_s.split('::').last.downcase
-    module_name.__send__ :extend, MPatch::Include::Module
+    if self.methods.include?(method_name.to_s.to_sym)
 
-    module_name.submodules.each do |sub_module_name|
+      module_name.__send__ :extend, MPatch::Include::Module
+      module_name.submodules.each do |sub_module_name|
 
-      constant= ::Object
-      constant_name= sub_module_name.to_s.split('::').last
-      array_of_target_constant= []
+        constant= ::Object
+        constant_name= sub_module_name.to_s.split('::').last
+        array_of_target_constant= []
 
-      unless sub_module_name.to_s.include?('And')
-        array_of_target_constant.push constant_name
-      else
-        sub_module_name.to_s.split('::').last.split('And').each do |tag_module|
-          array_of_target_constant.push tag_module
-          #puts tag_module
+        case true
+
+          when sub_module_name.to_s.include?('And')
+            sub_module_name.to_s.split('::').last.split('And').each do |tag_module|
+              array_of_target_constant.push tag_module
+            end
+
+          else
+            array_of_target_constant.push constant_name
+
         end
-      end
 
-      array_of_target_constant.each do |name|
-        target_constant = constant.const_defined?(name, false) ? constant.const_get(name) : constant.const_missing(name)
-        target_constant.__send__ method_name, sub_module_name
+        array_of_target_constant.each do |name|
+          target_constant = constant.const_defined?(name, false) ? constant.const_get(name) : constant.const_missing(name)
+          target_constant.__send__ method_name, sub_module_name
+        end
+
       end
 
     end
 
   end
-
 
 end
