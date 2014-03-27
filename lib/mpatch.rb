@@ -9,7 +9,7 @@ module MPatch
 
   self.submodules.each do |module_name|
 
-    method_name= module_name.to_s.split('::').last.downcase
+    method_name= module_name.to_s.split('::').last.downcase.to_s.to_sym
 
     module_name.__send__ :extend, MPatch::Include::Module
     module_name.submodules.each do |sub_module_name|
@@ -33,10 +33,7 @@ module MPatch
       array_of_target_constant.each do |name|
 
         target_constant = constant.const_defined?(name, false) ? constant.const_get(name) : constant.const_missing(name)
-
-        if target_constant.methods.include?(method_name.to_s.to_sym)
-          target_constant.__send__ method_name, sub_module_name
-        end
+        target_constant.__send__ method_name, sub_module_name
 
       end
 
