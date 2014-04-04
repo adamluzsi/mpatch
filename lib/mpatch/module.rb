@@ -54,5 +54,24 @@ module MPatch::Include
 
     end
 
+
+  end
+end
+
+module MPatch::Extend
+  module Module
+
+    def convert_instance_methods_to_singleton_methods
+
+      self.instance_methods.each do |symbol|
+        module_function symbol
+        public symbol
+      end
+
+    end
+
+    alias :ci2s :convert_instance_methods_to_singleton_methods
+    alias :instances2singletons :convert_instance_methods_to_singleton_methods
+
   end
 end
