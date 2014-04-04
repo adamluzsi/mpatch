@@ -7,70 +7,72 @@ This project aim to give flexible methods to the developer by giving new inherit
 
 for example
 
-`ruby
+```ruby
 
-require 'mpatch'
+    require 'mpatch'
 
-class Test
+    class Test
 
-  def initialize
+      def initialize
 
-    @hello= "world"
-    @sup=   "nothing"
+        @hello= "world"
+        @sup=   "nothing"
 
-  end
+      end
 
-end
+    end
 
-puts Test.new.to_hash
-#> {"hello" => "world", "sup" => "nothing"}
-`
+    puts Test.new.to_hash
+    #> {"hello" => "world", "sup" => "nothing"}
+
+```
 
 The module give you tools in your hand for inheritance handle.
 For example:
 
-`ruby
-puts Models::MongoidClassName.mixin_ancestors.include? Mongoid::Document
-#> true
+```ruby
 
-puts Mongoid::Document.inherited_by.inspect
-#> [MongoidClassName]
+    puts Models::MongoidClassName.mixin_ancestors.include? Mongoid::Document
+    #> true
 
-class Test
+    puts Mongoid::Document.inherited_by.inspect
+    #> [MongoidClassName]
 
-end
+    class Test
 
-module Hello
-  class World < Test
-  end
-end
+    end
 
-puts Test.inherited_by.inspect
-#> [Hello::World]
+    module Hello
+      class World < Test
+      end
+    end
 
-module ParentModule
+    puts Test.inherited_by.inspect
+    #> [Hello::World]
 
-end
+    module ParentModule
 
-module TargetModule
-  include ParentModule
-end
+    end
 
-module SomeModuleThatInclude
-  include TargetModule
-end
+    module TargetModule
+      include ParentModule
+    end
 
-class SomeClassThatInclude
-  include TargetModule
-end
+    module SomeModuleThatInclude
+      include TargetModule
+    end
 
-puts TargetModule.inherited_by.inspect
-#>[SomeClassThatInclude, SomeModuleThatInclude]
+    class SomeClassThatInclude
+      include TargetModule
+    end
 
-puts TargetModule.inherited_by(class).inspect
-#>[SomeClassThatInclude]
+    puts TargetModule.inherited_by.inspect
+    #>[SomeClassThatInclude, SomeModuleThatInclude]
 
-`
+    puts TargetModule.inherited_by(class).inspect
+    #>[SomeClassThatInclude]
+
+```
 
 
 But there is a lot of method, for example for modules modules / subbmodules call that retunr modules under that namespace.
