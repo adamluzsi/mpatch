@@ -69,7 +69,7 @@ For example:
     puts TargetModule.inherited_by.inspect
     #>[SomeClassThatInclude, SomeModuleThatInclude]
 
-    puts TargetModule.inherited_by(class).inspect
+    puts TargetModule.inherited_by(Class).inspect
     #>[SomeClassThatInclude]
 
 ```
