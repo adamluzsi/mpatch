@@ -22,7 +22,7 @@ for example
 
     end
 
-    puts Test.new.to_hash
+    puts Test.new.convert_to_hash
     #> {"hello" => "world", "sup" => "nothing"}
 
 ```
