@@ -3,7 +3,7 @@ mpatch
 
 Monkey patch collection for advance helper functions
 
-This project aim to give flexible methods to the developer by giving new methods by inheritance to the base classes
+This project aim to give flexible methods to the developer by giving new methods by inheritance to the base classes.
 This will result in lot of helper methods, and metaprograming tricks
 
 example with Class methods
