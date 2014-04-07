@@ -6,8 +6,20 @@ Monkey patch collection for advance helper functions
 This project aim to give flexible methods to the developer by giving new methods by inheritance to the base classes.
 This will result in lot of helper methods, and metaprograming tricks
 
-example with Class methods
 
+### Install
+
+    gem install mpatch
+
+### Use
+
+```ruby
+    # load and patch all
+    require 'mpatch'
+```
+
+
+### example with Class methods
 
 ```ruby
     require 'mpatch'
@@ -72,7 +84,7 @@ For example:
     #>[SomeClassThatInclude]
 ```
 
-## require for use only
+### require for use only
 
 ```ruby
     require File.join 'mpatch','array' # == require 'mpatch/array' but works on windows alike
@@ -89,7 +101,7 @@ For example:
     puts ["asd"].has_any_of?(%W[ 123 hello\ world sup? asd ])
 ```
 
-## make your own!
+### make your own!
 
 you can make your own monkey patches by the following
 
