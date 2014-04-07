@@ -1,7 +1,6 @@
-require File.join 'mpatch','module'
 require File.join 'mpatch','array'
-require File.join 'mpatch','all'
-require File.join 'mpatch'
 
-puts Module.ancestors.inspect
-puts ["asd"].has_any_of?(["asd"])
+# sugar syntax for Array.__send__ :include/:extend , ::MPatch::Module::Name
+MPatch.inject # == Array.__send__ :include, MPatch::Include::Array
+
+puts ["asd"].has_any_of?(%W[ 123 hello\ world sup? asd])

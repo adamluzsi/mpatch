@@ -10,7 +10,6 @@ example with Class methods
 
 
 ```ruby
-
     require 'mpatch'
 
     class Test
@@ -26,14 +25,12 @@ example with Class methods
 
     puts Test.new.convert_to_hash
     #> {"hello" => "world", "sup" => "nothing"}
-
 ```
 
 The module give you tools in your hand for inheritance handle.
 For example:
 
 ```ruby
-
     puts Models::MongoidClassName.mixin_ancestors.include? Mongoid::Document
     #> true
 
@@ -73,9 +70,46 @@ For example:
 
     puts TargetModule.inherited_by(Class).inspect
     #>[SomeClassThatInclude]
-
 ```
 
+## require for use only
+
+```ruby
+    require File.join 'mpatch','array' # == require 'mpatch/array' but works on windows alike
+
+    # sugar syntax
+    # in this case it will help you with Array class for the following
+    #
+    #   Array.__send__ :include/:extend , ::MPatch::Module::Name
+    #
+    # it will always choose include or extend method based on the module use porpuse
+    # now it's a :include
+
+    MPatch.patch! # || inject_patches || inject
+    puts ["asd"].has_any_of?(%W[ 123 hello\ world sup? asd ])
+```
+
+## make your own!
+
+you can make your own monkey patches by the following
+
+```ruby
+  module MPatch
+
+    module Include # if you want to include to the target object
+
+      module TargetClassName #> for example Array
+
+      end
+
+    end
+
+  end
+
+  MPatch.patch!
+  # done, you all set
+  # if you want to contribute with use cases, please do so! :)
+```
 
 But there is a lot of method, for example for modules modules / subbmodules call that retunr modules under that namespace.
 Lot of metaprogrammer stuff there too :)

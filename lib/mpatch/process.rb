@@ -21,6 +21,6 @@ module MPatch
   end
 
   require File.join 'mpatch','injector'
-  inject_patches
+
 
 end

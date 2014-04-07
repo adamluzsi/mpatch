@@ -4,11 +4,11 @@ module MPatch
 
     def inject_patches
 
-      begin
-        @@valid_inject_cmd.nil?
-      rescue ::NameError
-        return nil
-      end
+      #begin
+      #  @@valid_inject_cmd.nil?
+      #rescue ::NameError
+      #  return nil
+      #end
 
       self.submodules.each do |module_name|
 
@@ -50,11 +50,13 @@ module MPatch
 
     end
 
+    alias :inject :inject_patches
+    alias :patch! :inject_patches
+
   end
 
   require File.join 'mpatch','module'
-
-  @@valid_inject_cmd= true
   extend  MPatch::Include::Module
+  #@@valid_inject_cmd= true
 
 end
