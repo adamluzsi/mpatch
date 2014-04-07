@@ -1,17 +1,26 @@
-module MPatch::Extend
-  module Process
+module MPatch
 
-    # return a string obj that include the memory usage info
-    def memory_usage
+  module Extend
 
-      begin
-        return `pmap #{self.pid}`.lines.to_a(
-        ).last.chomp.scan(/ *\w* *(\w+)/)[0][0]
-      rescue ::NoMethodError
-        return nil
+    module Process
+
+      # return a string obj that include the memory usage info
+      def memory_usage
+
+        begin
+          return `pmap #{self.pid}`.lines.to_a(
+          ).last.chomp.scan(/ *\w* *(\w+)/)[0][0]
+        rescue ::NoMethodError
+          return nil
+        end
+
       end
 
     end
 
   end
+
+  require File.join 'mpatch','injector'
+  inject_patches
+
 end
