@@ -79,6 +79,36 @@ module MPatch
         self.scan(/#{str}/).count
       end
 
+      # return true or false
+      def check obj
+
+        case true
+
+          when obj.class <= Regexp
+            return ((self =~ obj).nil? ? false : true)
+
+          when obj.class <= String
+            return self.include?(obj)
+
+          when obj.class <= Array
+            obj.each do |element|
+              if self.check(element) == true
+                return true
+              end
+            end
+            return false
+
+          when obj.class <= Hash
+            raise ArgumentError, "not implemented object for #{__method__} method"
+
+          else
+            return self.include?(obj.to_s)
+
+
+        end
+
+      end
+
     end
 
   end
