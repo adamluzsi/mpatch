@@ -58,6 +58,36 @@ module MPatch
       end
 
 
+      def alias_singleton_methods_from class_name, *sym_names
+
+        method_names= sym_names.map{|e|e.to_s}
+        method_names= class_name.singleton_methods if method_names.empty?
+
+        method_names.each do |sym_name|
+          self.define_singleton_method(sym_name) { |*args|
+
+            if class_name.method(sym_name).parameters.empty?
+              class_name.method(sym_name).call
+            else
+              class_name.method(sym_name).call *args
+            end
+
+          }
+        end
+
+      end
+
+      def alias_instance_methods_from class_name, *sym_names
+
+        method_names= sym_names.map{|e|e.to_s}
+        method_names= class_name.instance_methods if method_names.empty?
+
+        method_names.each do |sym_name|
+          self.__send__ :define_method, sym_name, class_name.instance_method(sym_name)
+        end
+
+      end
+
     end
 
   end
