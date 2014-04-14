@@ -49,6 +49,8 @@ module MPatch
 
       end
 
+      alias :get_description :get_comments
+
     end
 
   end
