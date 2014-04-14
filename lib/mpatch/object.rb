@@ -177,7 +177,7 @@ module MPatch
       #   privatize ex: Symbol/String/Array   #> you can use this for make exceptions what should be not touched in the prcs
       #   privatize in: Symbol/String/Array   #> you can use this for make targeted collection of methods for privatize
       #
-      def privatize opts= {}
+      def privatize( opts= {} )
 
         unless opts.class <= Hash
           raise ArgumentError,"invalid input for options"
@@ -214,7 +214,6 @@ module MPatch
         else
           opts[:target]= 's'
           opts[:include] ||= self.methods.map{|e| e.to_s }
-
         end
 
         [:include,:exclude].each do |array_name|
@@ -227,7 +226,7 @@ module MPatch
 
         end
 
-        opts[:exclude].push('__send__').push('object_id')
+        opts[:exclude] + %W[ __send__ object_id ]
 
         if opts[:target][0] == 's'
 
@@ -259,49 +258,10 @@ module MPatch
 
       end
 
-
-
-      def try(exception= Exception,&block)
-
-        unless exception <= Exception
-          raise ArgumentError, "invalid exception class"
-        end
-
-        begin
-          return block.call
-        rescue exception => ex
-          @ruby_try_block_exception_tunel= ex
-          return ex
-        end
-
-      end
-
-      def catch exception = Exception, &block
-
-        if @ruby_try_block_exception_tunel.nil?
-          return nil
-        end
-
-        if @ruby_try_block_exception_tunel.class <= Exception
-
-          begin
-            block.call @ruby_try_block_exception_tunel
-          rescue ArgumentError
-            block.call
-          end
-
-        else
-          raise @ruby_try_block_exception_tunel.class,@ruby_try_block_exception_tunel.to_s
-        end
-
-      end
-
-
     end
 
   end
 
   require File.join 'mpatch','injector'
-
 
 end

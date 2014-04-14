@@ -167,6 +167,8 @@ you can make an object / class / module instance or self methods private even fr
 
 ```
 
+### After words
+
 But there is a lot of method, for example for modules modules / subbmodules call that retunr modules under that namespace.
 Lot of metaprogrammer stuff there too :)
 
