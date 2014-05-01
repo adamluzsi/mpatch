@@ -38,12 +38,14 @@ module MPatch
       # remove n. element from the end
       # and return a new object
       def pinch n=1
+        raise(ArgumentError) unless n.class <= Integer
         return self[0..(self.count-(n+1))]
       end
 
       # remove n. element from the end
       # and return the original object
       def pinch! n=1
+        raise(ArgumentError) unless n.class <= Integer
         n.times do
           self.pop
         end
@@ -52,11 +54,15 @@ module MPatch
 
       # shifted first element and return new array
       def skip n=1
-        self[1 .. -1]
+        raise(ArgumentError) unless n.class <= Integer
+        self[1 .. (n*(-1))]
       end
 
       def skip! n=1
-        self.shift
+        raise(ArgumentError) unless n.class <= Integer
+        n.times do
+          self.shift
+        end
         return self
       end
 
