@@ -1,32 +1,18 @@
 
-require_relative '../lib/mpatch/object'
+require_relative '../lib/mpatch/array'
 MPatch.patch!
 
+asd= [1,2,3,4,5]
 
+puts asd.inspect
 
-try { hello world }
-catch{ "not hello world " }
-#> "not hello world"
+puts asd.skip.inspect
+puts asd.inspect
+asd.skip!.inspect
+puts asd.inspect
 
+puts asd.pinch.inspect
+puts asd.inspect
 
-try { "hello world".asdaf }
-catch( NoMethodError ) { |ex|
-  puts "there is and error, because #{ex}"
-}
-
-#> you can cain up multiple catch for specific error
-try { "hello world".asdaf }
-catch( NoMethodError ) { |ex|
-  puts "there is and error, because #{ex}"
-}
-
-try { "hello world".asdaf }
-catch(ArgumentError) {
-  puts "it was and argument error"
-}
-
-catch( NoMethodError ) { |ex|
-  puts "bla bla #{ex}"
-}
-
-
+asd.pinch!.inspect
+puts asd.inspect

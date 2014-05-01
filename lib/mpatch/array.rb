@@ -11,7 +11,7 @@ module MPatch
         args.dup.each do |one_element|
           if one_element.class <= ::Array
             args.delete_at(args.index(one_element))
-            args= args+one_element
+            args += one_element
           end
         end
 
@@ -47,6 +47,16 @@ module MPatch
         n.times do
           self.pop
         end
+        return self
+      end
+
+      # shifted first element and return new array
+      def skip n=1
+        self[1 .. -1]
+      end
+
+      def skip! n=1
+        self.shift
         return self
       end
 
