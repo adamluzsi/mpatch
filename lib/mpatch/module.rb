@@ -88,6 +88,25 @@ module MPatch
 
       end
 
+      #convert class instance instance variables into a hash object
+      def convert_to_hash
+
+        # unless self.class.class <= ::Class
+        #   super
+        #   raise ::NoMethodError, "undefined method `#{__method__}' for #{self.inspect}"
+        # end
+
+        tmp_hash= ::Hash.new()
+
+        self.instance_variables.each do|var|
+          tmp_hash[var.to_s.delete("@")] = self.instance_variable_get(var)
+        end
+
+        return tmp_hash
+
+      end
+      alias :convert2hash :convert_to_hash
+
     end
 
   end
@@ -104,8 +123,6 @@ module MPatch
         end
 
       end
-
-      alias :ci2s :convert_instance_methods_to_singleton_methods
       alias :instances2singletons :convert_instance_methods_to_singleton_methods
 
     end

@@ -93,22 +93,30 @@ module MPatch
       # {:hello=> "world",:world => "hello"}.map_hash{|k,v| { k => 123 } }
       # #> {:hello=>123, :world=>123}
       #
-      def map_hash &block
+      def map_hash *args,&block
 
-        tmp_hash= self.class.new
-        map_hash_obj= self.map &block
-        map_hash_obj.each do |hash|
+        tmp_hash= self.class.new(*args)
+        self.map(&block).each do |hash|
+          case true
 
-          if hash.class <= ::Array
-            hash= self.class[*hash]
+            when hash.class <= ::Array
+              tmp_hash.deep_merge!( self.class[*hash] )
+
+            when hash.class <= ::Hash
+              tmp_hash.deep_merge!(hash)
+
+            else
+              raise ArgumentError,
+                    "invalid input as last valie for #{__method__}: #{hash}/#{hash.class}"
+
           end
-
-          tmp_hash.deep_merge!(hash)
 
         end
 
         return tmp_hash
+
       end
+      alias :map2hash :map_hash
 
       # Fetch a nested hash value
       def value_by_keys(*attrs)

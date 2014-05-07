@@ -68,24 +68,6 @@ module MPatch
         constant
       end
 
-      #convert class instance instance variables into a hash object
-      def convert_to_hash
-
-        unless self.class.class <= ::Class
-          super
-          #raise ::NoMethodError, "undefined method `to_hash' for #{self.inspect}"
-        end
-
-        tmp_hash= ::Hash.new()
-
-        self.instance_variables.each do|var|
-          tmp_hash[var.to_s.delete("@")] = self.instance_variable_get(var)
-        end
-
-        return tmp_hash
-
-      end
-
       # this will check that the class is
       # defined or not in the runtime memory
       def class_exists?

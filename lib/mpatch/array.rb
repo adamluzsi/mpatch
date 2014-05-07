@@ -168,6 +168,44 @@ module MPatch
       end
       alias :extract_hash! :extract_options!
 
+
+      # map hash will work just alike map but instead of an array it will return a hash obj
+      #
+      # [:hello, "world",:world , "hello"].map_hash{|k,v| [ k , 123] }
+      # #> {:hello=>123, :world=>123}
+      #
+      # [:hello,"world",:world,"hello"].map_hash{|k,v| { k => 123 } }
+      # #> {:hello=>123, :world=>123}
+      #
+      # [[:hello,"world"],[:world,"hello"]].map_hash{ |ary| { ary[0] => ary[1] } }
+      # #> {:hello=>"world", :world=>"hello"}
+      #
+      def map_hash *args,&block
+
+        tmp_hash= ::Hash.new(*args)
+        self.map(&block).each do |hash|
+          case true
+
+            when hash.class <= ::Array
+              tmp_hash.deep_merge!(::Hash[*hash])
+
+            when hash.class <= ::Hash
+              tmp_hash.deep_merge!(hash)
+
+            else
+              raise ArgumentError,
+                    "invalid input as last valie for #{__method__}: #{hash}/#{hash.class}"
+
+          end
+
+        end
+
+        return tmp_hash
+
+      end
+      alias :map2hash :map_hash
+
+
     end
 
   end
