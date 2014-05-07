@@ -1,20 +1,25 @@
+require 'mpatch'
 
-require_relative '../lib/mpatch/module'
-require_relative '../lib/mpatch/class'
-MPatch.patch!
+class Test2
+  @@test= "asd"
+end
 
-class Test
+class Test < Test2
 
   def initialize
+
     @hello= "world"
     @no   = "yes"
+
   end
 
 end
 
-puts Test.ancestors
+puts Test2.inherited_by.inspect
+# [Test]
 
-test= Test.new
-# puts test.methods#-Object.methods
+puts Test.convert2hash
+# {"test"=>"asd"}
 
-# puts Test.new.convert2hash
+puts Test.new.convert2hash
+# {"hello"=>"world", "no"=>"yes"}

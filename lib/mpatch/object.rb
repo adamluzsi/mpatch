@@ -66,7 +66,25 @@ module MPatch
           constant = constant.const_defined?(name, false) ? constant.const_get(name) : constant.const_missing(name)
         end
         constant
+
       end
+
+      #convert class instance instance variables into a hash object
+      def convert_to_hash
+
+        unless self.class.class <= ::Class
+          super
+        end
+
+        tmp_hash= {}
+        self.instance_variables.each do|var|
+          tmp_hash[var.to_s.delete("@")] = self.instance_variable_get(var)
+        end
+
+        return tmp_hash
+
+      end
+      alias :convert2hash :convert_to_hash
 
       # this will check that the class is
       # defined or not in the runtime memory

@@ -36,12 +36,14 @@ module MPatch
             begin
 
               if !return_array.include?(candidate) && candidate != self
-                case self.class.to_s
 
-                  when "Module"
+                #> can't make subclass of Class so == is enough
+                case true
+
+                  when self.class == ::Module
                     return_array.push candidate if candidate.mixin_ancestors.include?(self)
 
-                  when "Class"
+                  when self.class == ::Class
                     return_array.push candidate if candidate < self
 
                 end
@@ -49,11 +51,12 @@ module MPatch
               end
 
             rescue ::ArgumentError, ::NoMethodError
+
             end
           end
 
         end
-        return_array
+        return return_array
 
       end
 
@@ -88,18 +91,16 @@ module MPatch
 
       end
 
+      def hello
+        "hello"
+      end
+
       #convert class instance instance variables into a hash object
       def convert_to_hash
 
-        # unless self.class.class <= ::Class
-        #   super
-        #   raise ::NoMethodError, "undefined method `#{__method__}' for #{self.inspect}"
-        # end
-
-        tmp_hash= ::Hash.new()
-
-        self.instance_variables.each do|var|
-          tmp_hash[var.to_s.delete("@")] = self.instance_variable_get(var)
+        tmp_hash= {}
+        self.class_variables.each do|var|
+          tmp_hash[var.to_s.delete("@@")] = self.class_variable_get(var)
         end
 
         return tmp_hash

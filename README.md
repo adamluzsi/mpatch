@@ -21,6 +21,7 @@ This will result in lot of helper methods, and metaprograming tricks
 ### example with Class methods
 
 ```ruby
+
     require 'mpatch'
 
     class Test
@@ -38,10 +39,41 @@ This will result in lot of helper methods, and metaprograming tricks
     #> {"hello" => "world", "sup" => "nothing"}
 ```
 
+```ruby
+
+    require 'mpatch'
+
+    class Test2
+      @@test= "asd"
+    end
+
+    class Test < Test2
+
+      def initialize
+
+        @hello= "world"
+        @no   = "yes"
+
+      end
+
+    end
+
+    puts Test2.inherited_by.inspect
+    # [Test]
+
+    puts Test.convert2hash
+    # {"test"=>"asd"}
+
+    puts Test.new.convert2hash
+    # {"hello"=>"world", "no"=>"yes"}
+
+```
+
 The module give you tools in your hand for inheritance handle.
 For example:
 
 ```ruby
+
     puts Models::MongoidClassName.mixin_ancestors.include? Mongoid::Document
     #> true
 
