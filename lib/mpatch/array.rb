@@ -168,7 +168,6 @@ module MPatch
       end
       alias :extract_hash! :extract_options!
 
-
       # map hash will work just alike map but instead of an array it will return a hash obj
       #
       # [:hello, "world",:world , "hello"].map_hash{|k,v| [ k , 123] }
@@ -204,7 +203,6 @@ module MPatch
 
       end
       alias :map2hash :map_hash
-
 
     end
 

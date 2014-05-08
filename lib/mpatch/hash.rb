@@ -97,6 +97,7 @@ module MPatch
 
         tmp_hash= self.class.new(*args)
         self.map(&block).each do |hash|
+
           case true
 
             when hash.class <= ::Array
@@ -117,6 +118,13 @@ module MPatch
 
       end
       alias :map2hash :map_hash
+
+      def map_hash! *args,&block
+        self.replace(self.map_hash(*args,&block))
+      end
+
+      alias :map2hash! :map_hash!
+
 
       # Fetch a nested hash value
       def value_by_keys(*attrs)

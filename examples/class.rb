@@ -18,8 +18,8 @@ end
 puts Test2.inherited_by.inspect
 # [Test]
 
-puts Test.convert2hash
+puts Test.conv2hash
 # {"test"=>"asd"}
 
-puts Test.new.convert2hash
+puts Test.new.conv2hash
 # {"hello"=>"world", "no"=>"yes"}

@@ -24,25 +24,6 @@ This will result in lot of helper methods, and metaprograming tricks
 
     require 'mpatch'
 
-    class Test
-
-      def initialize
-
-        @hello= "world"
-        @sup=   "nothing"
-
-      end
-
-    end
-
-    puts Test.new.convert_to_hash
-    #> {"hello" => "world", "sup" => "nothing"}
-```
-
-```ruby
-
-    require 'mpatch'
-
     class Test2
       @@test= "asd"
     end
@@ -61,11 +42,12 @@ This will result in lot of helper methods, and metaprograming tricks
     puts Test2.inherited_by.inspect
     # [Test]
 
-    puts Test.convert2hash
+    puts Test.conv2hash
     # {"test"=>"asd"}
 
-    puts Test.new.convert2hash
+    puts Test.new.conv2hash
     # {"hello"=>"world", "no"=>"yes"}
+
 
 ```
 

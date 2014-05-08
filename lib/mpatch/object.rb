@@ -84,7 +84,7 @@ module MPatch
         return tmp_hash
 
       end
-      alias :convert2hash :convert_to_hash
+      alias :conv2hash :convert_to_hash
 
       # this will check that the class is
       # defined or not in the runtime memory

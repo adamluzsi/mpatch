@@ -106,7 +106,7 @@ module MPatch
         return tmp_hash
 
       end
-      alias :convert2hash :convert_to_hash
+      alias :conv2hash :convert_to_hash
 
     end
 
