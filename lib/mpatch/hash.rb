@@ -61,7 +61,7 @@ module MPatch
       #   h2.deep_merge(h1) #=> { :x => {:y => [4, 5, 6]}, :z => [7, 8, 9] }
       def deep_merge(other_hash)
         dup.deep_merge!(other_hash)
-      end unless method_defined? :deep_merge
+      end
 
       alias :+ :deep_merge
 
@@ -72,7 +72,7 @@ module MPatch
           self[k] = tv.is_a?(::Hash) && v.is_a?(::Hash) ? tv.deep_merge(v) : v
         end
         self
-      end unless method_defined? :deep_merge!
+      end
 
       # return bool that does the sub hash all element include the hash who call this or not
       def deep_include?(sub_hash)
@@ -83,7 +83,7 @@ module MPatch
                                   self[key] == sub_hash[key]
                                 end
         end
-      end unless method_defined? :deep_include?
+      end
 
       # map hash will work just alike map but instead of an array it will return a hash obj
       #
@@ -122,7 +122,6 @@ module MPatch
       def map_hash! *args,&block
         self.replace(self.map_hash(*args,&block))
       end
-
       alias :map2hash! :map_hash!
 
 
