@@ -11,7 +11,6 @@ x.map_hash{ |k,v| { k.to_sym => v.to_s } }
 puts Time.now - t
 
 var= {hello: "world",no: "yes"}
-var.map_hash!{|k,v| {k => v} }
 puts var
 
 var= [[:hello, "world"],[:no, "yes"]].map_hash{|k,v| {k => v} }
