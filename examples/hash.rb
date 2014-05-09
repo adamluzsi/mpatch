@@ -15,3 +15,7 @@ puts var
 
 var= [[:hello, "world"],[:no, "yes"]].map_hash{|k,v| {k => v} }
 puts var.inspect
+
+var = {hello: "world",no: 'yes'}.include?({no: 'yes'})
+puts var
+

@@ -124,6 +124,12 @@ module MPatch
       end
       alias :map2hash! :map_hash!
 
+      # check if every hash pair included in the self hash obj
+      def include? hash
+        puts hash.class
+        return super unless hash.class <= ::Hash
+        return (self.to_a - hash.to_a).empty?
+      end
 
       # Fetch a nested hash value
       def value_by_keys(*attrs)
