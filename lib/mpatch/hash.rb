@@ -143,7 +143,7 @@ module MPatch
         end
         return nil
       end
-      alias :fetch_by_keys :value_by_keys
+      alias :fetch_by :value_by_keys
 
     end
 
