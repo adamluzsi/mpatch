@@ -125,11 +125,11 @@ module MPatch
       alias :map2hash! :map_hash!
 
       # check if every hash pair included in the self hash obj
-      def include? hash
-        puts hash.class
+      def include_hash? hash
         return super unless hash.class <= ::Hash
-        return (self.to_a - hash.to_a).empty?
+        return (hash.to_a - self.to_a).empty?
       end
+      alias :contain_hash? :include_hash?
 
       # Fetch a nested hash value
       def value_by_keys(*attrs)
@@ -143,6 +143,7 @@ module MPatch
         end
         return nil
       end
+      alias :fetch_by_keys :value_by_keys
 
     end
 

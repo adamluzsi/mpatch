@@ -1,4 +1,5 @@
 
+
 require "mpatch"
 
 x = {}
@@ -16,6 +17,9 @@ puts var
 var= [[:hello, "world"],[:no, "yes"]].map_hash{|k,v| {k => v} }
 puts var.inspect
 
-var = {hello: "world",no: 'yes'}.include?({no: 'yes'})
+# require 'debugger'
+# debugger
+
+var = { hello: "world",no: 'yes' }.include_hash?( no: 'yes' )
 puts var
 
