@@ -161,11 +161,18 @@ module MPatch
       alias :cut_class! :extract_class!
 
       # generate params structure from array
-      # *args - options {}
+      # *args - args_options {}
       def extract_options!
         return self.extract_class!(::Hash).reduce({},:merge!)
       end
       alias :extract_hash! :extract_options!
+
+      # generate params structure from array
+      # *args + args_options {}
+      def extract_options
+        return self.dup.extract_class!(::Hash).reduce({},:merge!)
+      end
+      alias :extract_hash :extract_options
 
       # map hash will work just alike map but instead of an array it will return a hash obj
       #
