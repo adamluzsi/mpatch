@@ -163,8 +163,7 @@ module MPatch
       # generate params structure from array
       # *args - options {}
       def extract_options!
-        options= self.extract_class! ::Hash
-        return ::Hash[*options]
+        return self.extract_class!(::Hash).reduce({},:merge!)
       end
       alias :extract_hash! :extract_options!
 
